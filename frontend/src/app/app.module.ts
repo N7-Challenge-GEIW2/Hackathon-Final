@@ -9,6 +9,8 @@ import { UrlComponent } from './url/url.component';
 import { EmailComponent } from './email/email.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ApiserviceComponent } from './apiservice/apiservice.component';
+import { AudioComponent } from './audio/audio.component';
+import { PdfComponent } from './pdf/pdf.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { ApiserviceComponent } from './apiservice/apiservice.component';
     UrlComponent,
     EmailComponent,
     NavbarComponent,
-    ApiserviceComponent
+    ApiserviceComponent,
+    AudioComponent,
+    PdfComponent
   ],
   imports: [
     BrowserModule,
