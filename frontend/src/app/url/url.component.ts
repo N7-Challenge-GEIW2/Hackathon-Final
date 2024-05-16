@@ -13,7 +13,7 @@ export class UrlComponent {
   constructor(private http: HttpClient) { }
 
   checkUrl() {
-    const url = 'http://localhost:5000/url'; // Assurez-vous que l'URL correspond à celle de votre API Flask
+    const url = 'http://localhost:5000/url'; // Ensure this URL matches your Flask API URL
 
     const data = {
       text: this.urlInput
@@ -25,7 +25,7 @@ export class UrlComponent {
           this.result = response;
         },
         error => {
-          console.error('Erreur lors de la requête API :', error);
+          console.error('Error during API request:', error);
         }
       );
   }
