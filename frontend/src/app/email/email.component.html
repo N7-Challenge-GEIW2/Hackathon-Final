@@ -11,7 +11,7 @@
             placeholder="Put the email that you received here..."
             required
             [(ngModel)]="emailText"
-          ></textarea>
+          >{{ extractedText }}</textarea>
         </div>
         <div class="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600">
           <button
@@ -24,7 +24,8 @@
             <button
               type="button"
               class="inline-flex justify-center items-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
-            >
+              (click)="onUploadClick()"
+              >
               <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 20">
                 <path
                   stroke="currentColor"
