@@ -7,10 +7,7 @@ import { sendToBackground } from "@plasmohq/messaging"
 
 
  function IndexPopup() {
-   chrome.runtime.onMessage.addListener((message) => { 
-      console.log("happen")
-      console.log(message)
-    })
+  const url=chrome.runtime.getURL("/tabs/dashboard.html")
   const isPhishing = true;
   return (
     <div className="w-64 p-8 text-center">
@@ -24,9 +21,9 @@ import { sendToBackground } from "@plasmohq/messaging"
         {isPhishing ? "This website is phishing." : "This website is safe."}
       </div>
 
-      <button className="px-2 py-1 mt-4 font-bold text-blue-500 bg-white border border-blue-500 rounded hover:bg-blue-500 hover:text-white">
+      <a href={url} target="_blank" className="px-2 py-1 mt-4 font-bold text-blue-500 bg-white border border-blue-500 rounded hover:bg-blue-500 hover:text-white">
         Dashboard
-      </button>
+      </a>
     </div>
   );
 }
