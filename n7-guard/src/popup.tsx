@@ -1,12 +1,16 @@
-import { CountButton } from "~features/count-button"
-import React from "react"
+import React, { useEffect } from "react"
 import "~style.css"
 import redmark from "data-base64:~../assets/redmark.png"
 import check from "data-base64:~../assets/check.png"
+import { sendToBackground } from "@plasmohq/messaging"
 
 
 
-function IndexPopup() {
+ function IndexPopup() {
+   chrome.runtime.onMessage.addListener((message) => { 
+      console.log("happen")
+      console.log(message)
+    })
   const isPhishing = true;
   return (
     <div className="p-8 text-center">

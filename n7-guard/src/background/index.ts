@@ -1,5 +1,3 @@
-
-
 export {}
  
 console.log(
@@ -12,33 +10,37 @@ console.log(
 
 
 
-// chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
-//     console.log(changeInfo, tab)
-//   if (changeInfo.status === 'loading' && tab.active) {
-//     const url = tab.url;
-//     console.log('Tab loading updated:', url);
-//     if (url) {
-//       try {
-//         // const response = await fetch(phishingCheckUrl, {
-//         //   method: 'POST',
-//         //   body: JSON.stringify({ url }),
-//         //   headers: { 'Content-Type': 'application/json' },
-//         // });
-//         if (true) {
-//         //   const data = await response.json();
-//           // Update the popup with phishing risk information (call a function)
-//           updatePopup(true);
-//         } else {
-//         //   console.error('Error fetching phishing data:', response.statusText);
-//         }
-//       } catch (error) {
-//         console.error('Error checking URL:', error);
-//       }
-//     }
-//   }
-// });
+chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
+  console.log("letsgoo")
+  if (changeInfo.status === 'complete' && tab.active) {
+    const url = tab.url;
+    if (url) {
+      try {
+        // const response = await fetch(phishingCheckUrl, {
+        //   method: 'POST',
+        //   body: JSON.stringify({ url }),
+        //   headers: { 'Content-Type': 'application/json' },
+        // });
+        if (true) {
+        //   const data = await response.json();
+          // Update the popup with phishing risk information (call a function)
+          console.log('Tab loading updated:', url);
+          updatePopup(true);
+        } else {
+        //   console.error('Error fetching phishing data:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error checking URL:', error);
+      }
+    }
+  }
+});
 
-// function updatePopup(isPhishing: boolean) {
-//   // Send a message to the popup.tsx with the phishing risk data
-//   chrome.runtime.sendMessage({ isPhishing });
-// }
+function updatePopup(isPhishing: boolean) {
+  setTimeout(() => {
+    chrome.runtime.sendMessage({ isPhishing });
+
+  }, 5000);
+
+  // Send a message to the popup.tsx with the phishing risk data
+}
