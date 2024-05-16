@@ -1,4 +1,3 @@
-console.log("working");
 import redfish from "data-base64:~../assets/icon-red.development.png"
 import grayfish from "data-base64:~../assets/icon.development.png"
 import loading from "data-base64:~../assets/loading.gif"
@@ -139,3 +138,17 @@ function createImg(trNode:any,index:any){
     let tdElements = trNode.querySelectorAll('td');
    trNode.insertBefore(img, tdElements[3]);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
