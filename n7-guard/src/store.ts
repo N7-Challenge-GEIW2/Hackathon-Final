@@ -2,7 +2,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit"
 import { useDispatch, useSelector } from "react-redux"
 import type { TypedUseSelectorHook } from "react-redux"
 import { syncStorage } from "redux-persist-webextension-storage"
-import counterSlice from "./phishing"
+
 import {
   FLUSH,
   PAUSE,
@@ -16,6 +16,7 @@ import {
 } from "@plasmohq/redux-persist"
 import { Storage } from "@plasmohq/storage"
 
+import counterSlice from "~phishing-slice"
 
 // Here you can add all your reducers
 const combinedReducers = combineReducers({

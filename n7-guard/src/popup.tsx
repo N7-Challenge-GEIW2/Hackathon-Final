@@ -6,12 +6,16 @@ import { persistor, store } from "~store"
 let isPhishing = false;
 
 persistor.subscribe(() => {
-  console.log("State changed with: ", store?.getState())
+
+  const state = store.getState()
+  console.log(store.getState())
+  isPhishing = state.counter.isPhishing
+
 })
 
  function IndexPopup() {
   useEffect(() => {
-    console.log("fishhhhhhhhhhhhhh")
+    console.log("fishhhhhhhhhhhhhh",isPhishing)
   }, [isPhishing])
   const url=chrome.runtime.getURL("/tabs/dashboard.html")
   return (
