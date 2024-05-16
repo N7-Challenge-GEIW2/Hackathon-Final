@@ -2,13 +2,18 @@ import React, { useEffect } from "react"
 import "~style.css"
 import redmark from "data-base64:~../assets/redmark.png"
 import check from "data-base64:~../assets/check.png"
-import { sendToBackground } from "@plasmohq/messaging"
+import { persistor, store } from "~store"
+let isPhishing = false;
 
-
+persistor.subscribe(() => {
+  console.log("State changed with: ", store?.getState())
+})
 
  function IndexPopup() {
+  useEffect(() => {
+    console.log("fishhhhhhhhhhhhhh")
+  }, [isPhishing])
   const url=chrome.runtime.getURL("/tabs/dashboard.html")
-  const isPhishing = true;
   return (
     <div className="w-64 p-8 text-center">
       <img

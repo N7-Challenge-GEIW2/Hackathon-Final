@@ -1,4 +1,8 @@
+import { Storage } from "@plasmohq/storage"
+
 export {}
+
+const storage = new Storage()
  
 console.log(
   "Live now; make now always the most precious time. Now will never come again."
@@ -36,11 +40,11 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
   }
 });
 
-function updatePopup(isPhishing: boolean) {
-  setTimeout(() => {
-    chrome.runtime.sendMessage({ isPhishing });
+async function updatePopup(isPhishing: boolean) {
+    console.log("heooll")
+    await storage.set("isPhishing", true)
 
-  }, 5000);
+ 
 
   // Send a message to the popup.tsx with the phishing risk data
 }
