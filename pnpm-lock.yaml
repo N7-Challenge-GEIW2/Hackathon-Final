@@ -1,0 +1,36 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      '@plasmohq/messaging':
+        specifier: ^0.6.2
+        version: 0.6.2
+
+packages:
+
+  '@plasmohq/messaging@0.6.2':
+    resolution: {integrity: sha512-CGfcvfVE0wsN/Y/i/jV0nwjkwh2gBCEujZFhLoxJ12N0ScoP3JVEIvUxJSFsAD4ylBQ8IjD2FyjQozwiSxWc4Q==}
+    peerDependencies:
+      react: ^16.8.6 || ^17 || ^18
+    peerDependenciesMeta:
+      react:
+        optional: true
+
+  nanoid@5.0.3:
+    resolution: {integrity: sha512-I7X2b22cxA4LIHXPSqbBCEQSL+1wv8TuoefejsX4HFWyC6jc5JG7CEaxOltiKjc1M+YCS2YkrZZcj4+dytw9GA==}
+    engines: {node: ^18 || >=20}
+    hasBin: true
+
+snapshots:
+
+  '@plasmohq/messaging@0.6.2':
+    dependencies:
+      nanoid: 5.0.3
+
+  nanoid@5.0.3: {}
