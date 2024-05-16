@@ -21,12 +21,12 @@ export class EmailComponent {
   }
 
 
-  // OCR 
+  // OCR **********************************
 
   public extractedText: string = ''; 
   public imageUrl?: string;
 
-  
+
   onUploadClick() {
     const fileInput = document.createElement('input');
     fileInput.type = 'file';

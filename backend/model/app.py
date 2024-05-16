@@ -118,9 +118,11 @@ def preprocess_url(url):
 @app.route('/email', methods=['POST'])
 def classify_email():
     data = request.json
+    print(data)
     text = data['text']
     text_transformed = tfidf_vectorizer.transform([text])
     prediction = email_model.predict(text_transformed)
+    print(prediction)
     result = {'prediction': prediction.tolist()}
     return jsonify(result)
 
