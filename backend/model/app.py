@@ -1,33 +1,47 @@
 from flask import Flask, request, jsonify
-from transformers import AutoModelForSequenceClassification, AutoTokenizer, pipeline
-
+import joblib
+import pickle
+import numpy as np
+from keras.models import load_model
+from keras.preprocessing.sequence import pad_sequences
+from flask_cors import CORS
 app = Flask(__name__)
-
+CORS(app, resources={r"/*": {"origins": "*"}}) 
 # Charger les modèles et les tokenizers
-email_model_name = "email.pkl"
-url_model_name = "url.h5"
+email_model_path = "email.pkl"
+url_model_path = "url.h5"
+tfidf_vectorizer_path = "tfidf_vectorizer.pkl"
 
-email_tokenizer = AutoTokenizer.from_pretrained(email_model_name)
-email_model = AutoModelForSequenceClassification.from_pretrained(email_model_name)
+# Charger le modèle scikit-learn et le vectorizer
+email_model = joblib.load(email_model_path)
+with open(tfidf_vectorizer_path, 'rb') as f:
+    tfidf_vectorizer = pickle.load(f)
 
-url_tokenizer = AutoTokenizer.from_pretrained(url_model_name)
-url_model = AutoModelForSequenceClassification.from_pretrained(url_model_name)
+# Charger le modèle Keras
+url_model = load_model(url_model_path)
 
-email_classifier = pipeline("text-classification", model=email_model, tokenizer=email_tokenizer)
-url_classifier = pipeline("text-classification", model=url_model, tokenizer=url_tokenizer)
-    
+def preprocess_text(text, tokenizer, maxlen=100):
+    sequences = tokenizer.texts_to_sequences([text])
+    padded_seq = pad_sequences(sequences, maxlen=maxlen)
+    return padded_seq
+
 @app.route('/email', methods=['POST'])
 def classify_email():
     data = request.json
     text = data['text']
-    result = email_classifier(text)
+    text_transformed = tfidf_vectorizer.transform([text])
+    prediction = email_model.predict(text_transformed)
+    result = {'prediction': prediction.tolist()}
     return jsonify(result)
 
 @app.route('/url', methods=['POST'])
 def classify_url():
     data = request.json
     text = data['text']
-    result = url_classifier(text)
+    # Assurez-vous d'avoir une méthode de tokenization pour le modèle Keras
+    padded_seq = preprocess_text(text, url_tokenizer)
+    prediction = url_model.predict(padded_seq)
+    result = {'prediction': prediction.tolist()}
     return jsonify(result)
 
 if __name__ == '__main__':
