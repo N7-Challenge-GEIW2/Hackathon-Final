@@ -26,11 +26,11 @@ persistor.subscribe(() => {
         className="inline-block w-16 h-16 mx-auto mb-4"
       />
       
-      <div className={isPhishing ? "text-lg font-bold" : "text-lg font-bold"}>
+      <div className={isPhishing ? "text-lg font-bold mb-4" : "text-lg font-bold mb-4"}>
         {isPhishing ? "This website is phishing." : "This website is safe."}
       </div>
 
-      <a href={url} target="_blank" className="px-2 py-1 mt-4 font-bold text-blue-500 bg-white border border-blue-500 rounded hover:bg-blue-500 hover:text-white">
+      <a href={url} target="_blank" className="px-2 py-1 font-bold text-blue-500 bg-white border border-blue-500 rounded hover:bg-blue-500 hover:text-white">
         Dashboard
       </a>
     </div>
