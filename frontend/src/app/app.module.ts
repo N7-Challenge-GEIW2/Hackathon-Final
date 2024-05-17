@@ -8,7 +8,6 @@ import { HomeComponent } from './home/home.component';
 import { UrlComponent } from './url/url.component';
 import { EmailComponent } from './email/email.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { ApiserviceComponent } from './apiservice/apiservice.component';
 import { AudioComponent } from './audio/audio.component';
 import { PdfComponent } from './pdf/pdf.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -20,7 +19,6 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     UrlComponent,
     EmailComponent,
     NavbarComponent,
-    ApiserviceComponent,
     AudioComponent,
     PdfComponent
   ],
