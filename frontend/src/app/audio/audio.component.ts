@@ -31,7 +31,7 @@ export class AudioComponent {
           if (result.reason === sdk.ResultReason.RecognizedSpeech) {
             console.log(`Recognized: ${result.text}`);
             const data = { text: result.text };
-            this.http.post<any>('https://6237-196-70-252-214.ngrok-free.app/email', data).subscribe(response => {
+            this.http.post<any>('localhost:5000/email', data).subscribe(response => {
               this.prediction = response.prediction;
             });
             elem.innerText = `Recognized: ${result.text}`;
