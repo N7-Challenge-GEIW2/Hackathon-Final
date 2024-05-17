@@ -1,12 +1,9 @@
 import { setisPhishingFalse, setisPhishingTrue } from "../phishing-slice"
 import { persistor, store } from "~store"
 import iconphishing from 'url:../../assets/icon-red.development.png';
-import type { text } from "stream/consumers";
-import { url } from "inspector";
 
 export {}
 
- 
 console.log(
   "Live now; make now always the most precious time. Now will never come again."
 )

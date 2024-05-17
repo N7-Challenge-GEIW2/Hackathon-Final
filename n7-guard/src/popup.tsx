@@ -13,7 +13,7 @@ persistor.subscribe(() => {
 
 })
 
- function IndexPopup() {
+function IndexPopup() {
   useEffect(() => {
     console.log("fishhhhhhhhhhhhhh",isPhishing)
   }, [isPhishing])
