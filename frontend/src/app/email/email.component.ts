@@ -12,14 +12,36 @@ export class EmailComponent {
   prediction: any;
 
   constructor(private http: HttpClient) {}
-
-  submitForm() {
-    const data = { text: this.emailText };
-    this.http.post<any>('http://localhost:5000/email', data).subscribe(response => {
-      this.prediction = response.prediction;
-    });
+  onEmailTextChange(value: string) {
+    this.emailText = value;
   }
+  errorMessage: string = '';
+  isPhishing: boolean | null = null;
+  submitted: boolean = false;
+  submitForm() {
+    this.errorMessage = '';
+    this.submitted = false;
+    this.isPhishing = null;
+    this.prediction = null;
 
+    this.http.post<{ prediction: string[] }>('https://6237-196-70-252-214.ngrok-free.app/email', { text: this.emailText })
+      .subscribe(
+        response => {
+          if (response.prediction[0] === 'Phishing Email') {
+            this.isPhishing = true;
+            this.prediction = 'Phishing Email';
+          } else {
+            this.isPhishing = false;
+            this.prediction = 'Safe Email';
+          }
+          this.submitted = true;
+        },
+        error => {
+          console.error('Error during API request:', error);
+          this.errorMessage = 'An error occurred while checking the email.';
+        }
+      );
+  }
 
   // OCR **********************************
 
