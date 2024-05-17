@@ -17,7 +17,6 @@ persistor.subscribe(() => {
   useEffect(() => {
     console.log("fishhhhhhhhhhhhhh",isPhishing)
   }, [isPhishing])
-  const url=chrome.runtime.getURL("/tabs/dashboard.html")
   return (
     <div className="w-64 p-8 text-center">
       <img
@@ -30,7 +29,7 @@ persistor.subscribe(() => {
         {isPhishing ? "This website is phishing." : "This website is safe."}
       </div>
 
-      <a href={url} target="_blank" className="px-2 py-1 font-bold text-blue-500 bg-white border border-blue-500 rounded hover:bg-blue-500 hover:text-white">
+      <a href={"http://localhost:5173"} target="_blank" className="px-2 py-1 font-bold text-blue-500 bg-white border border-blue-500 rounded hover:bg-blue-500 hover:text-white">
         Dashboard
       </a>
     </div>

@@ -35,7 +35,8 @@ getTable()
             let body=result[1][0][2][0][1][5][1][0][2][1]
             body=stripHtmlTags(body)
             //fetch
-            const response= await fetch("https://6237-196-70-252-214.ngrok-free.app/email",{
+            console.log("bow")
+            const response= await fetch("https://9c5e-196-70-252-214.ngrok-free.app/email",{
               method: 'POST',
               body: JSON.stringify({ text:body }),
               headers: { 'Content-Type': 'application/json' },
@@ -44,16 +45,16 @@ getTable()
             console.log("data",result,data["prediction"][0])
             array[RC]=data["prediction"][0]=="Safe Email"?false:true
             
-              setTimeout(async () => {
-                await fetch("https://92bd-196-70-252-214.ngrok-free.app/email/add",{
-                  method: 'POST',
-                  body: JSON.stringify({ email:emaile,status:data["prediction"][0]!="Safe Email"?"Phishing":"Not Phishing" }),
-                  headers: { 'Content-Type': 'application/json',    
-                      'ngrok-skip-browser-warning': 'true'
-                },
-                })
+              // setTimeout(async () => {
+              //   await fetch("https://92bd-196-70-252-214.ngrok-free.app/email/add",{
+              //     method: 'POST',
+              //     body: JSON.stringify({ email:emaile,status:data["prediction"][0]!="Safe Email"?"Phishing":"Not Phishing" }),
+              //     headers: { 'Content-Type': 'application/json',    
+              //         'ngrok-skip-browser-warning': 'true'
+              //   },
+              //   })
 
-              },500)
+              // },500)
 
       });
           
