@@ -14,7 +14,7 @@ const getStar = () => {
     });
   };
   let rememberOldHtml=""
-  getStar().then((star:any) => {
+  getStar().then(async (star:any) => {
     let phishing=undefined
     rememberOldHtml=star.innerHTML
       let div=document.createElement("div")
@@ -29,15 +29,20 @@ const getStar = () => {
       div.appendChild(img)
       
       star.appendChild(div)
-      setTimeout(()=>{{
-        phishing=true
-        if(phishing===true){
+      const response= await fetch("https://6237-196-70-252-214.ngrok-free.app/email",{
+              method: 'POST',
+              body: JSON.stringify({ text:stripHtmlTags(rememberOldHtml) }),
+              headers: { 'Content-Type': 'application/json' },
+            })
+      const data= await response.json();
+      const  isPhishing=data["prediction"][0]=="Safe Email"?false:true
+        if(isPhishing===true){
           div.innerHTML=""
           div.appendChild(invokeWarning())
-        }else if(phishing===false){
+        }else if(isPhishing===false){
           star.innerHTML=rememberOldHtml
         }
-      }},2000)
+      
 
 
   })
@@ -69,4 +74,8 @@ function invokeWarning(){
     star.innerHTML = rememberOldHtml;
   });
   return warningdiv
+}
+
+function stripHtmlTags(html) {
+  return html.replace(/<[^>]*>?/g, '');
 }

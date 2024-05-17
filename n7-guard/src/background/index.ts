@@ -1,6 +1,8 @@
 import { setisPhishingFalse, setisPhishingTrue } from "../phishing-slice"
 import { persistor, store } from "~store"
 import iconphishing from 'url:../../assets/icon-red.development.png';
+import type { text } from "stream/consumers";
+import { url } from "inspector";
 
 export {}
 
@@ -14,29 +16,29 @@ console.log(
 // const phishingCheckUrl = 'https://your-backend-domain/api/check-phishing';
 
 
-
+let phishingCheckUrl="https://6237-196-70-252-214.ngrok-free.app/url"
 chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
   console.log("letsgoo")
   if (changeInfo.status === 'complete' && tab.active) {
     const url = tab.url;
-    if (url) {
+    if (url.indexOf('www.google') < 0 && url.indexOf('mail.google') < 0){
       try {
-        // const response = await fetch(phishingCheckUrl, {
-        //   method: 'POST',
-        //   body: JSON.stringify({ url }),
-        //   headers: { 'Content-Type': 'application/json' },
-        // });
-        if (true) {
-        //   const data = await response.json();
-          // Update the popup with phishing risk information (call a function)
-          console.log('Tab loading updated:', url);
-          updatePopup(false,tabId);
-        } else {
-        //   console.error('Error fetching phishing data:', response.statusText);
-        }
+        console.log('Tab loading updated:', url);
+        const response = await fetch(phishingCheckUrl, {
+          method: 'POST',
+          body: JSON.stringify({ text:url }),
+          headers: { 'Content-Type': 'application/json' },
+        });
+        const data = await response.json();
+        const isPhishing = data.prediction === 'phishing' || data.prediction === 'malicious';
+        console.log("is phishing",isPhishing)
+        updatePopup(isPhishing,tabId,url);
       } catch (error) {
         console.error('Error checking URL:', error);
       }
+    }else{
+      updatePopup(false,tabId,url);
+
     }
   }
 });
@@ -61,10 +63,10 @@ chrome.webRequest.onCompleted.addListener(
   ["responseHeaders"]
 );
 
-async function updatePopup(isPhishing: boolean,tabId:number) {
+async function updatePopup(isPhishing: boolean,tabId:number,url:string) {
   if(isPhishing){
     
-    store.dispatch(setisPhishingTrue())
+    store.dispatch(setisPhishingTrue({url}))
     chrome.action.setBadgeText({ text: "WARN", tabId: tabId });
     chrome.action.setBadgeBackgroundColor({ color: "#FF0000", tabId: tabId });
     console.log("iconphishing",iconphishing)

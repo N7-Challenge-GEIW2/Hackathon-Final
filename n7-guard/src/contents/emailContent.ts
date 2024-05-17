@@ -14,25 +14,35 @@ const getTable = () => {
     }, 1000);
   });
 };
-let  array:any[]=[]
+let  array:any={}
 getTable()
   .then(async (table:any) => {
     const trNodes = table.childNodes;
     trNodes.forEach((trNode:any,index:any) => {
+      let thread=trNode.querySelector('[data-thread-id]').getAttribute('data-thread-id').replace("#","")
         setInterval(async () => {
-            createImg(trNode,index)
+            createImg(trNode,thread)
         }, 500);
     });
     let trNode=trNodes[28];
-          const dataThreadIdNode = trNode.querySelector('[data-thread-id]').getAttribute('data-thread-id')
+      trNodes.forEach(async(trNode:any,index:any) => {
+        const dataThreadIdNode = trNode.querySelector('[data-thread-id]').getAttribute('data-thread-id')
             let RC=dataThreadIdNode.replace("#","")
             let result=await emailBody(RC)
             result=JSON.parse(result)
             let body=result[1][0][2][0][1][5][1][0][2][1]
             body=stripHtmlTags(body)
             //fetch
-            array[0]=true
-            array[1]=false
+            const response= await fetch("https://6237-196-70-252-214.ngrok-free.app/email",{
+              method: 'POST',
+              body: JSON.stringify({ text:body }),
+              headers: { 'Content-Type': 'application/json' },
+            })
+            const data = await response.json();
+            console.log("data",result,data["prediction"][0])
+            array[RC]=data["prediction"][0]=="Safe Email"?false:true
+      });
+          
 
   })
   .catch((error) => {
@@ -111,15 +121,15 @@ function stripHtmlTags(html) {
   
 
 
-function createImg(trNode:any,index:any){
+function createImg(trNode:any,thread:any){
     //verify if the  picture  exist 
 
     trNode.querySelectorAll('img');
     let src=loading
-    if(array[index]===true){
+    if(array[thread]===true){
         src=redfish
     }
-    else if(array[index]===false){
+    else if(array[thread]===false){
         src=grayfish
     }
     if(trNode.querySelector('img.phishing-img')!==null){
