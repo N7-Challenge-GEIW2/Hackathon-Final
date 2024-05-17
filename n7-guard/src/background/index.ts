@@ -21,7 +21,7 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
   console.log("letsgoo")
   if (changeInfo.status === 'complete' && tab.active) {
     const url = tab.url;
-    if (url.indexOf('www.google') < 0){
+    if (url.indexOf('www.google') < 0 && url.indexOf('mail.google') < 0){
       try {
         console.log('Tab loading updated:', url);
         const response = await fetch(phishingCheckUrl, {
@@ -36,6 +36,9 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
       } catch (error) {
         console.error('Error checking URL:', error);
       }
+    }else{
+      updatePopup(false,tabId,url);
+
     }
   }
 });
