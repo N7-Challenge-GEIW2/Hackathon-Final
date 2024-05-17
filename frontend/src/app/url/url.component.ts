@@ -13,7 +13,7 @@ export class UrlComponent {
   constructor(private http: HttpClient) { }
 
   checkUrl() {
-    const url = 'http://localhost:5000/url'; // Ensure this URL matches your Flask API URL
+    const url = 'https://f6cb-196-70-252-214.ngrok-free.app/url'; // Ensure this URL matches your Flask API URL
 
     const data = {
       text: this.urlInput

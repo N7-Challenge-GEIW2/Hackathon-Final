@@ -29,7 +29,7 @@ const getStar = () => {
       div.appendChild(img)
       
       star.appendChild(div)
-      const response= await fetch("https://6237-196-70-252-214.ngrok-free.app/email",{
+      const response= await fetch("http://localhost:3000/email",{
               method: 'POST',
               body: JSON.stringify({ text:stripHtmlTags(rememberOldHtml) }),
               headers: { 'Content-Type': 'application/json' },

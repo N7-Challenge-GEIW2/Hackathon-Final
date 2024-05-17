@@ -48,7 +48,7 @@ const Profile = () => {
             console.log(`Recognized: ${result.text}`);
             elem.innerText = `Recognized: ${result.text}`;
             setIsLoading(false);
-             axios.post('https://6237-196-70-252-214.ngrok-free.app/email', { text: result.text }).then(response => {
+             axios.post('https://f6cb-196-70-252-214.ngrok-free.app/email', { text: result.text }).then(response => {
                 if (response.data.prediction === 'malicious') {
                   setIsPhishing(true);
                 } else {

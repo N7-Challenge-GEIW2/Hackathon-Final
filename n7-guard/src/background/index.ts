@@ -16,7 +16,7 @@ console.log(
 // const phishingCheckUrl = 'https://your-backend-domain/api/check-phishing';
 
 
-let phishingCheckUrl="https://6237-196-70-252-214.ngrok-free.app/url"
+let phishingCheckUrl="https://f6cb-196-70-252-214.ngrok-free.app/url"
 chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
   console.log("letsgoo")
   if (changeInfo.status === 'complete' && tab.active) {

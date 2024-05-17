@@ -24,7 +24,7 @@ export class EmailComponent {
     this.isPhishing = null;
     this.prediction = null;
 
-    this.http.post<{ prediction: string[] }>('https://6237-196-70-252-214.ngrok-free.app/email', { text: this.emailText })
+    this.http.post<{ prediction: string[] }>('https://f6cb-196-70-252-214.ngrok-free.app/email', { text: this.emailText })
       .subscribe(
         response => {
           if (response.prediction[0] === 'Phishing Email') {

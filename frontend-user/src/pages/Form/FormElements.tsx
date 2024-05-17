@@ -13,7 +13,7 @@ const FormElements = () => {
     setErrorMessage(''); // Clear any previous error messages
 
     try {
-      const response = await axios.post('https://6237-196-70-252-214.ngrok-free.app/url', { text: url });
+      const response = await axios.post('https://f6cb-196-70-252-214.ngrok-free.app /url', { text: url });
       if (response.data.prediction === 'malicious') {
         setIsPhishing(true);
       } else {

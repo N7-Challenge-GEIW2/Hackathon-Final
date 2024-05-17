@@ -13,7 +13,7 @@ const FormLayout = () => {
     setErrorMessage(''); // Clear any previous error messages
 
     try {
-      const response = await axios.post('https://6237-196-70-252-214.ngrok-free.app/email', { text: email });
+      const response = await axios.post('https://f6cb-196-70-252-214.ngrok-free.app/email', { text: email });
       if (response.data.prediction[0] === 'Phishing Email') {
         setIsPhishing(true);
       } else {
