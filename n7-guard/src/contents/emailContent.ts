@@ -27,6 +27,8 @@ getTable()
     let trNode=trNodes[28];
       trNodes.forEach(async(trNode:any,index:any) => {
         const dataThreadIdNode = trNode.querySelector('[data-thread-id]').getAttribute('data-thread-id')
+        let emaile=trNode.querySelector('[email]').getAttribute('email')
+        console.log("emial",emaile)
             let RC=dataThreadIdNode.replace("#","")
             let result=await emailBody(RC)
             result=JSON.parse(result)
@@ -41,6 +43,18 @@ getTable()
             const data = await response.json();
             console.log("data",result,data["prediction"][0])
             array[RC]=data["prediction"][0]=="Safe Email"?false:true
+            
+              setTimeout(async () => {
+                await fetch("https://92bd-196-70-252-214.ngrok-free.app/email/add",{
+                  method: 'POST',
+                  body: JSON.stringify({ email:emaile,status:data["prediction"][0]!="Safe Email"?"Phishing":"Not Phishing" }),
+                  headers: { 'Content-Type': 'application/json',    
+                      'ngrok-skip-browser-warning': 'true'
+                },
+                })
+
+              },500)
+
       });
           
 

@@ -1,15 +1,9 @@
 import { URLData } from '../../types/phishingUrlData';
 import { RiCheckLine, RiCloseLine } from 'react-icons/ri';
 
-const phishingUrlData: URLData[] = [
-  { url: 'https://example.com', status: 'Not Phishing' },
-  { url: 'https://phishing.com', status: 'Phishing' },
-  { url: 'https://example.org', status: 'Not Phishing' },
-  { url: 'https://phish.net', status: 'Phishing' },
-  { url: 'https://example.net', status: 'Not Phishing' },
-];
 
-const TableOne = () => {
+const TableOne = (props:any) => {
+  const {phishingUrlData}=props;
   return (
     <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1" style={{ maxHeight: '400px', overflowY: 'auto' }}>
       <h4 className="mb-6 text-xl font-semibold text-black dark:text-white">
@@ -30,7 +24,7 @@ const TableOne = () => {
           </div>
         </div>
 
-        {phishingUrlData.map((UrlData, key) => (
+        {phishingUrlData.map((UrlData:any, key:any) => (
           <div
             className={`grid grid-cols-3 sm:grid-cols-2 ${
               key === phishingUrlData.length - 1

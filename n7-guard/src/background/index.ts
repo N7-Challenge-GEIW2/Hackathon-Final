@@ -32,7 +32,13 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
         const data = await response.json();
         const isPhishing = data.prediction === 'phishing' || data.prediction === 'malicious';
         console.log("is phishing",isPhishing)
+
         updatePopup(isPhishing,tabId,url);
+          await fetch("https://92bd-196-70-252-214.ngrok-free.app/url/add",{
+              method: 'POST',
+              body: JSON.stringify({ url:url,status:isPhishing?"Phishing":"Not Phishing" }),
+              headers: { 'Content-Type': 'application/json' },
+            })
       } catch (error) {
         console.error('Error checking URL:', error);
       }

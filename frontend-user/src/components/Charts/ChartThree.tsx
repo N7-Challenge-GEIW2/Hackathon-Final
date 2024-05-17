@@ -1,5 +1,5 @@
 import { ApexOptions } from 'apexcharts';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 
 interface ChartThreeState {
@@ -49,14 +49,56 @@ const options: ApexOptions = {
 };
 
 const ChartThree: React.FC = () => {
+  const [totalUrlVisited, setTotalUrlVisited] = useState<number>(0);
+  const [totalEmailVisited, setTotalEmailVisited] = useState<number>(0);
+  const [totalPhishingUrl, setTotalPhishingUrl] = useState<number>(0);
+  const [totalPhishingEmail, setTotalPhishingEmail] = useState<number>(0);
+  const [emails, setEmails] = useState<Array<any>>([]);
+  const [urls, setUrls] = useState<Array<any>>([]);
+  const [urlpercentage0, setUrlPercentage0] = useState<number>(0);
+  const [urlpercentage1, setUrlPercentage1] = useState<number>(0);
+  useEffect(() => {
+    // Fetch data from your API endpoints
+    fetchData();
+  }, []);
+  useEffect(() => {
+    // Fetch data from your API endpoints
+    setTotalPhishingUrl(urls.reduce((count:any, item:any) => {
+      console.log(item.status=="Phishing",count)
+      return item.status == 'Phishing' ? count + 1 : count;
+    }, 0));
+
+    const phishingUrlPercentage = (totalPhishingUrl / urls.length) * 100;
+    const nonPhishingUrlPercentage = 100 - phishingUrlPercentage;
+
+    console.log(totalPhishingUrl,urls.length,phishingUrlPercentage,nonPhishingUrlPercentage )
+    setUrlPercentage0(Math.floor(phishingUrlPercentage));
+    setUrlPercentage1(Math.ceil(nonPhishingUrlPercentage));
+    setState({
+      series: [Math.floor(phishingUrlPercentage), Math.ceil(nonPhishingUrlPercentage)],
+    })
+  }, [urls]);
+  const fetchData = async () => {
+    try {
+      const urlResponse = await fetch("http://localhost:3000"+'/email'); // Replace with your actual API endpoint
+      const urlData = await urlResponse.json();
+      setTotalUrlVisited(urlData.length);
+      setUrls(urlData)
+
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+
   const [state, setState] = useState<ChartThreeState>({
-    series: [22, 78],
+    series: [urlpercentage0, urlpercentage1],
   });
 
   const handleReset = () => {
     setState((prevState) => ({
       ...prevState,
-      series: [22, 78],
+      series: [urlpercentage0, urlpercentage1],
     }));
   };
   handleReset;
@@ -87,7 +129,7 @@ const ChartThree: React.FC = () => {
             <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-primary"></span>
             <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
               <span> Phishing </span>
-              <span> 22% </span>
+              <span> {urlpercentage0}% </span>
             </p>
           </div>
         </div>
@@ -96,7 +138,7 @@ const ChartThree: React.FC = () => {
             <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#745bb8]"></span>
             <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
               <span> Not Phishing </span>
-              <span> 78% </span>
+              <span>  {urlpercentage1}%  </span>
             </p>
           </div>
         </div>

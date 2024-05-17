@@ -1,15 +1,9 @@
 import { EMAILDATA } from '../../types/phishingEmailData';
 import { RiCheckLine, RiCloseLine } from 'react-icons/ri';
 
-const phishingEmailData: EMAILDATA[] = [
-  { email: 'Email1@gmail.com', status: 'Not Phishing' },
-  { email: 'Email2@gmail.com', status: 'Phishing' },
-  { email: 'Email3@gmail.org', status: 'Not Phishing' },
-  { email: 'Email4@gmail.net', status: 'Phishing' },
-  { email: 'Email5@gmail.net', status: 'Not Phishing' },
-];
 
-const TableTwo = () => {
+const TableTwo = (props:any) => {
+  const { phishingEmailData } = props;
   return (
     <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1" style={{ maxHeight: '400px', overflowY: 'auto' }}>
       <h4 className="mb-6 text-xl font-semibold text-black dark:text-white">
@@ -20,7 +14,7 @@ const TableTwo = () => {
         <div className="grid grid-cols-3 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-2">
           <div className="p-2.5 xl:p-5">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Url
+              Email
             </h5>
           </div>
           <div className="p-2.5 text-center xl:p-5">
@@ -30,7 +24,7 @@ const TableTwo = () => {
           </div>
         </div>
 
-        {phishingEmailData.map((EmailData, key) => (
+        {phishingEmailData.map((EmailData:any, key:any) => (
           <div
             className={`grid grid-cols-3 sm:grid-cols-2 ${
               key === phishingEmailData.length - 1
