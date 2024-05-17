@@ -2,19 +2,21 @@ import { createSlice } from "@reduxjs/toolkit"
 
 export interface CounterState {
   isPhishing: boolean,
-  checkphishing:boolean 
+  url:string
 }
 
 const counterSlice = createSlice({
   name: "phishing",
-  initialState: { isPhishing: false,checkphishing:false },
+  initialState: { isPhishing: false,checkphishing:false,url:"" },
   reducers: {
-    setisPhishingTrue: (state) => {
+    setisPhishingTrue: (state,obj) => {
       state.isPhishing = true
+      state.url= obj.payload.url
 
     },
     setisPhishingFalse: (state) => {
       state.isPhishing =false
+      state.url=""
 
     },
     setCheckPhishing: (state) => {

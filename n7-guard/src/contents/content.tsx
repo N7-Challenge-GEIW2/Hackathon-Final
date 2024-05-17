@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from "react";
 import "~style.css"
 import { persistor, store } from "~store"
+import { setisPhishingFalse, setisPhishingTrue } from "../phishing-slice"
 
 let isPhishing = false;
-persistor.subscribe(() => {
-    const state = store.getState()
-    isPhishing=state.counter.isPhishing
-    
-  })
+
 const CustomButton = () => {
     let [displayWarning,setDisplayWarning]=useState(false)
     //watch if it's phishing
-    useEffect(() => {
-      console.log("fishhhhhhhhhhhhhh",isPhishing)
-      if(isPhishing){
-        setDisplayWarning(true)
-      }
-    }, [isPhishing])
+    persistor.subscribe(() => {
+      const state = store.getState()
+      isPhishing=state.counter.isPhishing && state.counter.url.split("#")[0]==window.location.href.split("#")[0]
+      console.log("is counter",state.counter)
+      console.log("is phishing",isPhishing)
+      console.log("is url",state.counter.url.split("#")[0]==window.location.href.split("#")[0])
+      console.log("is w",window.location.href.split("#")[0])
+      console.log("is s",state.counter.isPhishing)
+      setDisplayWarning(isPhishing)
+  
+    })
   return (
     <div  className="background fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 w-screen h-screen
     "
