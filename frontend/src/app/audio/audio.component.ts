@@ -12,7 +12,7 @@ export class AudioComponent {
 
   constructor(private http: HttpClient) {}
   onFileSelected(event: any) {
-    const subscriptionKey = 'da735a70c8794ae5bba8c4c38d3af014';
+    const subscriptionKey = '--------------------';
     const serviceRegion = 'eastus';
 
     const file = event.target.files[0];
