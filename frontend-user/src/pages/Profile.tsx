@@ -35,7 +35,7 @@ const Profile = () => {
       let audioUrl1 = fileReader.result as string;
       setAudioUrl(audioUrl1);
       setIsLoading(true);
-      const subscriptionKey = '837adc1427124321a011acc5517cfe4b';
+      const subscriptionKey = '-------------------';
       const serviceRegion = 'eastus';
        const audioFile = convertBase64ToFile(audioUrl1, file.name);
         const audioConfig = sdk.AudioConfig.fromWavFileInput(audioFile);
