@@ -11,6 +11,8 @@ In the digital age, cyber threats have become increasingly sophisticated, with p
 - **User-Friendly Interface**: Intuitive design for easy interaction.
 - **Adaptability**: Uses machine learning to adapt to new phishing techniques.
 - **Comprehensive Analysis**: Supports URL, email, image (via OCR), and audio analysis.
+## Architecture 
+![image](https://github.com/NouhaylaMouakkal/Hackathon-Final/assets/74161217/5ccc22ee-fbb3-4747-a71e-e79a5ccec5a8)
 
 ## Tech Stack
 
@@ -21,6 +23,7 @@ In the digital age, cyber threats have become increasingly sophisticated, with p
 - **Back-end**:
   - Python (Flask)
   - MongoDB
+  - node js(Express)
 - **AI/ML**:
   - TensorFlow
   - Keras
@@ -29,10 +32,7 @@ In the digital age, cyber threats have become increasingly sophisticated, with p
   - Plasmo
   - Ngrok
   - Microsoft Azure
-  - Solidity
-  - MetaMask
-  - Hardhat
-  - Ethers
+  - github Actions
   - Postman
   - OpenCV
 
